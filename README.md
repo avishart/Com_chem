@@ -1,5 +1,5 @@
 # Com_chem
-Small scripts for computational chemistry calculations
+Short scripts for computational chemistry calculations
 
 boltzmann.py: Calculate the Boltzman distribution by giving the script a list of output files.  
 
