@@ -1,5 +1,6 @@
 # Com_chem
-Short scripts for computational chemistry calculations
+Short scripts for computational chemistry calculations. Mainly usable for the softwares Gaussian09 and Gaussian16, http://gaussian.com/.
+
 
 boltzmann.py: Calculate the Boltzman distribution by giving the script a list of output files.  
 
