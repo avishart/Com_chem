@@ -10,7 +10,7 @@ import sys
 #Seperation symbol
 sep=";"
 #The name of saved plot
-title="EC_DBA.png"
+title="EC_PET3.png"
 #X-axis title 
 x_label="Distance / [Angstrom]"
 #Y-axis title
@@ -18,7 +18,7 @@ y_label="EC / [mHartree]"
 #List of colors for plotting
 color=["red","blue","green","orange","pink","purple","black","yellow"]
 #List of markers for plotting
-markers=["o","s","o","o","o","o","o","o"]
+markers=["o","o","o","o","o","s","s","s"]
 #Want to Fit data (y/n)
 fit_data="n"
 #Function to fit to
@@ -68,7 +68,7 @@ with open(sys.argv[1]) as thefile:
     content=thefile.readlines()
 
 #Get the labels of y values and remove them without
-label=list(filter(None,content[0].replace("\n","").split(sep)))
+label=list(filter(None,content[0].replace("\n","").split(sep)[1:]))
 content=content[1:]
 x_list=[]
 len_list=len(list(filter(None,content[0].split(sep))))
@@ -86,7 +86,7 @@ for line in content:
 #If strings are used for x values then make a new x list
 if x_str.lower()=="y" or x_str.lower()=="yes":
     x_num_list=[i+1 for i in range(len(x_list))]
-    plt.xticks(x_num_list,x_list,rotation=-60)
+    plt.xticks(x_num_list,x_list,fontsize=12,rotation=-60)
 #If values are used as x values then make them floats
 else:
     x_list=map(float,x_list)
