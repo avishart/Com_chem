@@ -31,7 +31,7 @@ x_str="y"
 def rm_none_values(x_list,y_list):
     x_list_new=[]
     y_list_new=[]
-    for i in range(len(y_list)):
+    for i in range(len(x_list)):
         if y_list[i]==None or x_list[i]==None:
             continue
         else:
@@ -68,35 +68,36 @@ with open(sys.argv[1]) as thefile:
     content=thefile.readlines()
 
 #Get the labels of y values and remove them without
-label=list(filter(None,content[0].replace("\n","").split(sep)[1:]))
+label=content[0].replace("\n","").split(sep)[1:]
+len_list=len(label)
 content=content[1:]
 x_list=[]
-len_list=len(list(filter(None,content[0].split(sep))))
-y_list=[[] for i in range(len_list-1)]
+y_list=[[] for i in range(len_list)]
 #Get the data to x and y values
 for line in content:
-    newline=list(filter(None,line.split(sep)))
+    newline=line.split(sep)
     x_list.append(newline[0])
-    for i in range(1,len_list):
+    for i in range(1,len_list+1):
         try:
             y_list[i-1].append(float(newline[i]))
         except:
             y_list[i-1].append(None)
-
+print(y_list)
 #If strings are used for x values then make a new x list
 if x_str.lower()=="y" or x_str.lower()=="yes":
     x_num_list=[i+1 for i in range(len(x_list))]
-    plt.xticks(x_num_list,x_list,fontsize=12,rotation=-60)
+    plt.xticks(x_num_list,x_list,fontsize=6,rotation=-90)
 #If values are used as x values then make them floats
 else:
     x_list=map(float,x_list)
     x_conti=np.linspace(x_list[0],x_list[-1],(x_list[-1]-x_list[0])/0.1)
 
 #Plot data
-for i in range(len_list-1):
+for i in range(len_list):
     if x_str.lower()=="y" or x_str.lower()=="yes":
         x_list_new,y_list_new=rm_none_values(x_num_list,y_list[i])
         plt.plot(x_list_new,y_list_new,color=color[i],marker=markers[i],alpha=0.5,linestyle="",label=label[i])
+        print(label[i],y_list_new)
     else:
         x_list_new,y_list_new=rm_none_values(x_list,y_list[i])
         plt.plot(x_list_new,y_list_new,color=color[i],marker=markers[i],linestyle="",label=label[i])
@@ -107,13 +108,12 @@ for i in range(len_list-1):
             plt.plot(x_conti,y_func(x_conti,func_fit,coeff),color=color[i],linestyle="-",label=str(round(coeff[1],1))+"*exp("+str(round(coeff[0],3))+"*x),$R^2$="+str(round(R2,3)))
 
 #Show the plot
-plt.legend(loc=0)
+plt.legend(loc=0,fontsize=8)
+plt.yscale('log')
 plt.xlabel(x_label)
 plt.ylabel(y_label)
 plt.tight_layout()
 plt.savefig(title)
 plt.show()
 plt.close()
-
-
 
