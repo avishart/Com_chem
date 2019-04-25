@@ -68,7 +68,7 @@ with open(sys.argv[1]) as thefile:
     content=thefile.readlines()
 
 #Get the labels of y values and remove them without
-label=list(filter(None,content[0].split(sep)))
+label=list(filter(None,content[0].replace("\n","").split(sep)))
 content=content[1:]
 x_list=[]
 len_list=len(list(filter(None,content[0].split(sep))))
@@ -96,7 +96,7 @@ else:
 for i in range(len_list-1):
     if x_str.lower()=="y" or x_str.lower()=="yes":
         x_list_new,y_list_new=rm_none_values(x_num_list,y_list[i])
-        plt.plot(x_list_new,y_list_new,color=color[i],marker=markers[i],linestyle="",label=label[i])
+        plt.plot(x_list_new,y_list_new,color=color[i],marker=markers[i],alpha=0.5,linestyle="",label=label[i])
     else:
         x_list_new,y_list_new=rm_none_values(x_list,y_list[i])
         plt.plot(x_list_new,y_list_new,color=color[i],marker=markers[i],linestyle="",label=label[i])
