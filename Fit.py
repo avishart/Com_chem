@@ -82,7 +82,6 @@ for line in content:
             y_list[i-1].append(float(newline[i]))
         except:
             y_list[i-1].append(None)
-print(y_list)
 #If strings are used for x values then make a new x list
 if x_str.lower()=="y" or x_str.lower()=="yes":
     x_num_list=[i+1 for i in range(len(x_list))]
@@ -97,7 +96,6 @@ for i in range(len_list):
     if x_str.lower()=="y" or x_str.lower()=="yes":
         x_list_new,y_list_new=rm_none_values(x_num_list,y_list[i])
         plt.plot(x_list_new,y_list_new,color=color[i],marker=markers[i],alpha=0.5,linestyle="",label=label[i])
-        print(label[i],y_list_new)
     else:
         x_list_new,y_list_new=rm_none_values(x_list,y_list[i])
         plt.plot(x_list_new,y_list_new,color=color[i],marker=markers[i],linestyle="",label=label[i])
