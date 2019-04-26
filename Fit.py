@@ -68,7 +68,7 @@ with open(sys.argv[1]) as thefile:
     content=thefile.readlines()
 
 #Get the labels of y values and remove them without
-label=content[0].replace("\n","").split(sep)[1:]
+label=list(filter(None,content[0].replace("\n","").split(sep)[1:]))
 len_list=len(label)
 content=content[1:]
 x_list=[]
