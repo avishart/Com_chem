@@ -85,7 +85,7 @@ for line in content:
 #If strings are used for x values then make a new x list
 if x_str.lower()=="y" or x_str.lower()=="yes":
     x_num_list=[i+1 for i in range(len(x_list))]
-    plt.xticks(x_num_list,x_list,fontsize=6,rotation=-90)
+    plt.xticks(x_num_list,x_list,fontsize=8,rotation=-90)
 #If values are used as x values then make them floats
 else:
     x_list=map(float,x_list)
@@ -106,7 +106,7 @@ for i in range(len_list):
             plt.plot(x_conti,y_func(x_conti,func_fit,coeff),color=color[i],linestyle="-",label=str(round(coeff[1],1))+"*exp("+str(round(coeff[0],3))+"*x),$R^2$="+str(round(R2,3)))
 
 #Show the plot
-plt.legend(loc=0,fontsize=8)
+plt.legend(bbox_to_anchor=(1.05, 1),loc=2,fontsize=8)
 plt.yscale('log')
 plt.xlabel(x_label)
 plt.ylabel(y_label)
